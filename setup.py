@@ -3,6 +3,7 @@ import re
 import sys
 import platform
 import subprocess
+from os.path import join as path_join, abspath, dirname
 
 from setuptools import setup, Extension, find_packages
 from setuptools.command.build_ext import build_ext
@@ -31,7 +32,8 @@ class CMakeBuild(build_ext):
             self.build_extension(ext)
 
     def build_extension(self, ext):
-        extdir = os.path.abspath(os.path.dirname(self.get_ext_fullpath(ext.name)))
+        extdir = path_join(abspath(dirname(self.get_ext_fullpath(ext.name))), 'pywirehair')
+        print(f'extdir is {extdir}')
         cmake_args = ['-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=' + extdir]
         cmake_args += ['-DBUILD_SHARED_LIBS=1']
 
@@ -71,15 +73,19 @@ def read_version():
 
 setup(
     name='pywirehair',
+    license='MIT',
+    url="https://github.com/sz3/pywirehair",
     version=read_version(),
+
     author='Stephen Zimmerman',
     author_email='sz@galacticicecube.com',
     description='Python wrapper for wirehair FEC',
     long_description=open("README.md").read(),
+    long_description_content_type='text/markdown',
+
     ext_modules=[CMakeExtension('wirehair', 'wirehair')],
-    packages=find_packages(exclude=["tools"]),
+    packages=find_packages(exclude=["tests"]),
     cmdclass=dict(build_ext=CMakeBuild),
-    url="https://github.com/sz3/pywirehair",
     zip_safe=False,
     classifiers=[
         'License :: OSI Approved :: MIT License',

@@ -3,7 +3,9 @@ import re
 import sys
 import platform
 import subprocess
-from os.path import join as path_join, abspath, dirname
+from glob import iglob
+from os.path import join as path_join, abspath, dirname, basename
+from shutil import copyfile
 
 from setuptools import setup, Extension, find_packages
 from setuptools.command.build_ext import build_ext
@@ -64,6 +66,11 @@ class CMakeBuild(build_ext):
                                '--target', os.path.basename(ext.name)
                                ] + build_args,
                               cwd=self.build_temp)
+
+        localdir = path_join(dirname(abspath(__file__)), 'pywirehair')
+        for f in iglob(f'{extdir}/libwirehair*'):
+            print(f'copying {f} to {localdir}')
+            copyfile(f, path_join(localdir, basename(f)))
 
 
 def read_version():

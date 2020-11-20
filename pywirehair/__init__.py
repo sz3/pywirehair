@@ -1,3 +1,2 @@
-from .encoder import encoder
-from .decoder import decoder
-
+from .encoder import encoder  # noqa
+from .decoder import decoder  # noqa

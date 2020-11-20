@@ -12,7 +12,7 @@ class wirehair:
 
     def __new__(cls, *args, **kwargs):
         # do wirehair init stuff on first run
-        if cls._wirehair == None:
+        if cls._wirehair is None:
             cls._wirehair = ctypes.CDLL(_dll_path)
         if cls._init != Wirehair_Success:
             cls._init = cls._wirehair.wirehair_init_(2)

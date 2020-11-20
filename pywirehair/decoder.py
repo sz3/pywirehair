@@ -24,7 +24,6 @@ class decoder:
         return None
 
     def _recover(self):
-        print('we recovering?')
         dec = (ctypes.c_uint8 * self.msg_size)()
         res = wirehair().dll().wirehair_recover(
             self._did,

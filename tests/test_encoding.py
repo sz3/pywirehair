@@ -1,4 +1,5 @@
 from base64 import b64encode, b64decode
+from os import urandom
 from unittest import TestCase
 
 from pywirehair import encoder, decoder
@@ -25,9 +26,41 @@ class EncoderTest(TestCase):
         self.assertEqual(b64encode(enc.encode(1)), SAMPLES_A[1])
         self.assertEqual(b64encode(enc.encode(2)), SAMPLES_A[2])
 
+    def test_encode_bigger(self):
+        data = b'0123456789' * 100
+        enc = encoder(data, 600)
+
+        self.assertEqual(b64encode(enc.encode(0)), SAMPLES_B[0])
+        self.assertEqual(b64encode(enc.encode(1)), SAMPLES_B[1])
+        self.assertEqual(b64encode(enc.encode(2)), SAMPLES_B[2])
+
     def test_decode(self):
         expected = b'0123456789' * 10
         dec = decoder(len(expected), 60)
 
         self.assertEqual(None, dec.decode(0, b64decode(SAMPLES_A[0])))
         self.assertEqual(expected, dec.decode(2, b64decode(SAMPLES_A[2])))
+
+    def test_decode_bigger(self):
+        expected = b'0123456789' * 100
+        dec = decoder(len(expected), 600)
+
+        self.assertEqual(None, dec.decode(0, b64decode(SAMPLES_B[0])))
+        self.assertEqual(expected, dec.decode(2, b64decode(SAMPLES_B[2])))
+
+    def test_roundtrip(self):
+        data = b'' + urandom(21234)
+
+        enc = encoder(data, 1300)
+        dec = decoder(len(data), 1300)
+
+        for i in range(30):
+            if i % 4 == 0:  # fake data loss
+                continue
+            fountain_bytes = enc.encode(i)
+            res = dec.decode(i, fountain_bytes)
+            if res != None:
+                break
+        self.assertEqual(res, data)
+        self.assertEqual(22, i)
+

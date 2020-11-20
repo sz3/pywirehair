@@ -67,9 +67,9 @@ class CMakeBuild(build_ext):
                                ] + build_args,
                               cwd=self.build_temp)
 
+        # copy over the built library for local dev
         localdir = path_join(dirname(abspath(__file__)), 'pywirehair')
         for f in iglob(f'{extdir}/libwirehair*'):
-            print(f'copying {f} to {localdir}')
             copyfile(f, path_join(localdir, basename(f)))
 
 

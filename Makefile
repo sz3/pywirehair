@@ -13,6 +13,7 @@ clean:
 
 build:
 	python setup.py build
+	python dev-copy-libs.py
 
 test:
 	coverage run -m unittest

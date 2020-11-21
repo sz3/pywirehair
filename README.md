@@ -18,13 +18,14 @@ or maybe:
 from pywirehair import encoder, decoder
 
 data = b'0123456789' * 10
-enc = encoder(data, 60)
+enc = encoder(data, 40)
 a = enc.encode(0)
 
-dec = decoder(len(data), 60)
+dec = decoder(len(data), 40)
 dec.decode(0, a)
 
-for i in range(1,5):
+for i in range(2,4):  # skip 1 for fun
+    print(i)
     a = enc.encode(i)
     print(dec.decode(i, a))
 ```

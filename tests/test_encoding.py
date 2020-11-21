@@ -41,6 +41,9 @@ class EncoderTest(TestCase):
         self.assertEqual(None, dec.decode(0, b64decode(SAMPLES_A[0])))
         self.assertEqual(expected, dec.decode(2, b64decode(SAMPLES_A[2])))
 
+        # this shouldn't explode! The decoder will cache the decoded result.
+        self.assertEqual(expected, dec.decode(1, b64decode(SAMPLES_A[1])))
+
     def test_decode_bigger(self):
         expected = b'0123456789' * 100
         dec = decoder(len(expected), 600)

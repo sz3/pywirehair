@@ -8,8 +8,15 @@ class decoder:
     def __init__(self, msg_size, packet_size):
         self.msg_size = msg_size
         self._did = wirehair().dll().wirehair_decoder_create(0, ctypes.c_uint64(msg_size), ctypes.c_uint32(packet_size))
+        self._result = None
+
+    def result(self):
+        return self._result
 
     def decode(self, block_id, buffer):
+        if self._result:
+            return self._result
+
         buffer = (ctypes.c_uint8 * len(buffer)).from_buffer_copy(buffer)
         res = wirehair().dll().wirehair_decode(
             self._did,
@@ -32,4 +39,5 @@ class decoder:
         )
         if res != Wirehair_Success:
             return None
-        return bytes(bytearray(dec))
+        self._result = bytes(bytearray(dec))
+        return self._result

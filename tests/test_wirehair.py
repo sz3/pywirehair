@@ -17,7 +17,7 @@ SAMPLES_B = [
 ]
 
 
-class EncoderTest(TestCase):
+class WirehairTest(TestCase):
     def test_encode(self):
         data = b'0123456789' * 10
         enc = encoder(data, 60)
@@ -41,8 +41,17 @@ class EncoderTest(TestCase):
         self.assertEqual(None, dec.decode(0, b64decode(SAMPLES_A[0])))
         self.assertEqual(expected, dec.decode(2, b64decode(SAMPLES_A[2])))
 
+    def test_decode_error_cases(self):
+        expected = b'0123456789' * 10
+        dec = decoder(len(expected), 60)
+
+        for _ in range(20):
+            self.assertEqual(None, dec.decode(0, b64decode(SAMPLES_A[0])))
+        self.assertEqual(expected, dec.decode(2, b64decode(SAMPLES_A[2])))
+
         # this shouldn't explode! The decoder will cache the decoded result.
         self.assertEqual(expected, dec.decode(1, b64decode(SAMPLES_A[1])))
+        self.assertEqual(expected, dec.decode(2, b64decode(SAMPLES_A[2])))
 
     def test_decode_bigger(self):
         expected = b'0123456789' * 100

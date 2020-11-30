@@ -16,6 +16,7 @@ class wirehair:
             cls._wirehair = ctypes.CDLL(_dll_path)
         if cls._init != Wirehair_Success:
             cls._init = cls._wirehair.wirehair_init_(2)
+            print('init is {}'.format(cls._init))
         return super().__new__(cls, *args, **kwargs)
 
     def dll(self):

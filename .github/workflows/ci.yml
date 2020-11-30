@@ -27,4 +27,4 @@ jobs:
         run: coveralls
       - name: is there a core dump?
         if: ${{ failure() }}
-        run: ls -lR /home/runner/work/_temp/
+        run: ls -lR

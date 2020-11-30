@@ -1,3 +1,6 @@
+[![Build Status](https://github.com/sz3/pywirehair/workflows/ci/badge.svg)](https://github.com/sz3/pywirehair/actions?query=workflow%3Aci)
+[![Coverage Status](https://coveralls.io/repos/github/sz3/pywirehair/badge.svg?branch=master)](https://coveralls.io/github/sz3/pywirehair?branch=master)
+
 ## pywirehair
 
 A python wrapper for the [wirehair](https://github.com/catid/wirehair) forward error correction C library. wirehair is included as a git subtree.

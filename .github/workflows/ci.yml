@@ -20,7 +20,7 @@ jobs:
       - name: Run tests!
         run: |
           ulimit -c unlimited
-          sudo coverage run -m unittest
+          sudo python -m unittest
       - name: Log coverage
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

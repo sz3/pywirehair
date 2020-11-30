@@ -18,8 +18,13 @@ jobs:
       - name: build native depedencies
         run: make build
       - name: Run tests!
-        run: coverage run -m unittest
+        run: |
+          ulimit -c unlimited
+          coverage run -m unittest
       - name: Log coverage
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: coveralls
+      - name: is there a core dump?
+        if: ${{ failure() }}
+        run: ls -l

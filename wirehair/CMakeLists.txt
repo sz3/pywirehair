@@ -58,7 +58,7 @@ if(MSVC)
 else()
     set(CMAKE_CXX_FLAGS "-Wall -Wextra -static-libgcc -static-libstdc++")
     set(CMAKE_CXX_FLAGS_DEBUG "-g -O0 -march=native")
-    set(CMAKE_CXX_FLAGS_RELEASE "-O3 -march=native")
+    set(CMAKE_CXX_FLAGS_RELEASE "-g -O2 -march=native")
 endif()
 
 add_library(wirehair ${LIB_SOURCE_FILES})

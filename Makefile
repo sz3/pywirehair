@@ -14,7 +14,7 @@ clean:
 build:
 	python setup.py build
 	python dev-copy-libs.py
-	ldd pywirehair/libwirehair.so.2
+	ldd pywirehair/libwirehair.so
 
 test:
 	coverage run -m unittest

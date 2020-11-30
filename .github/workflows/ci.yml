@@ -20,12 +20,8 @@ jobs:
       - name: Run tests!
         run: |
           ulimit -c unlimited
-          echo '/tmp/core.%h.%e.%t' > /proc/sys/kernel/core_pattern
           coverage run -m unittest
       - name: Log coverage
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: coveralls
-      - name: is there a core dump?
-        if: ${{ failure() }}
-        run: ls -lR /tmp

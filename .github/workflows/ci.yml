@@ -14,7 +14,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: install dependencies
-        run: pip install -U pip coveralls
+        run: sudo pip install -U pip coveralls
       - name: build native depedencies
         run: make build
       - name: Run tests!

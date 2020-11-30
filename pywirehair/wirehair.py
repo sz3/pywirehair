@@ -14,11 +14,8 @@ class wirehair:
         # do wirehair init stuff on first run
         if cls._wirehair is None:
             cls._wirehair = ctypes.CDLL(_dll_path)
-            print(cls._wirehair)
         if cls._init != Wirehair_Success:
-            print('attempting init:')
             cls._init = cls._wirehair.wirehair_init_(2)
-            print(cls._wirehair)
         return super().__new__(cls, *args, **kwargs)
 
     def dll(self):

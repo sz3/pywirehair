@@ -3,7 +3,7 @@ from os.path import join as path_join, abspath, dirname
 
 from .constants import Wirehair_Success
 
-_dll_path = path_join(dirname(abspath(__file__)), 'libwirehair.so')
+_dll_path = path_join(dirname(abspath(__file__)), 'libwirehair.so.2')
 
 
 class wirehair:

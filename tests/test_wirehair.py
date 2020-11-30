@@ -21,5 +21,5 @@ class WirehairTest(TestCase):
     def test_encode(self):
         data = b'0123456789' * 10
         enc = encoder(data, 60)
-        self.assertFalse(True)
+        self.assertEqual(b64encode(enc.encode(0)), SAMPLES_A[0])
 

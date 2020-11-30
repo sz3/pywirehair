@@ -20,8 +20,13 @@ jobs:
       - name: Run tests!
         run: |
           ulimit -c unlimited
-          coverage run -m unittest
+          sudo coverage run -m unittest
       - name: Log coverage
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: coveralls
+      - name: is there a core dump?
+        if: ${{ failure() }}
+        run: |
+          sudo chmod -R +rwx /cores/*
+          ls -lR /cores

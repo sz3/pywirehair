@@ -14,19 +14,14 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: install dependencies
-        run: sudo pip install -U pip coveralls
+        run: pip install -U pip coveralls
       - name: build native depedencies
         run: make build
       - name: Run tests!
         run: |
           ulimit -c unlimited
-          sudo make test
+          coverage run -m unittest
       - name: Log coverage
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: coveralls
-      - name: is there a core dump?
-        if: ${{ failure() }}
-        run: |
-          sudo chmod -R +rwx /cores/*
-          ls -lR /cores

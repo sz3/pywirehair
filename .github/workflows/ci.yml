@@ -20,7 +20,7 @@ jobs:
       - name: which python?
         run: which coverage
       - name: Run tests!
-        run: sudo coverage3 run -m unittest discover -s tests/
+        run: sudo $(which coverage) run -m unittest discover -s tests/
       - name: Log coverage
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

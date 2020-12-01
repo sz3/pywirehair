@@ -22,4 +22,4 @@ class encoder:
         w = ctypes.byref(writelen)
         if 1000 != Wirehair_Success:
             return None'''
-        return bytes(bytearray(self._buff)[:0])
+        return b''

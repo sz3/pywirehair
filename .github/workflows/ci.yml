@@ -6,7 +6,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        python-version: [3.6, 3.7, 3.8, pypy3]
+        python-version: [3.6]
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python
@@ -18,13 +18,13 @@ jobs:
       - name: build native code
         run: make build
       - name: system python version
-        run: sudo python3 --version
+        run: sudo which python3
       - name: my python version
-        run: python3 --version
+        run: which python3
       - name: Run tests!
         run: |
           ulimit -c unlimited
-          python3 -m unittest discover -s tests/
+          /usr/bin/python3 -m unittest discover -s tests/
       - name: Log coverage
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -18,7 +18,7 @@ jobs:
       - name: build native code
         run: make build
       - name: which python?
-        run: which python
+        run: which coverage
       - name: Run tests!
         run: sudo coverage3 run -m unittest discover -s tests/
       - name: Log coverage

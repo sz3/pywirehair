@@ -14,12 +14,12 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: install dependencies
-        run: sudo pip install -U pip coveralls
-      - name: build native depedencies
+        run: sudo pip install -U pip coveralls coverage
+      - name: build native code
         run: make build
       - name: Run tests!
         run: |
-          ulimit -c unlimited
+          sudo ulimit -c unlimited
           sudo coverage3 run -m unittest discover -s tests/
       - name: Log coverage
         env:

@@ -25,7 +25,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: coveralls
-      - uses: actions/upload-artifact@master
-        with:
-          name: bits
-          path: pywirehair/

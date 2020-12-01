@@ -16,10 +16,10 @@ class encoder:
     def encode(self, block_id):
         writelen = ctypes.c_uint32(0)
         print(wirehair().dll())
-        b = ctypes.c_uint(block_id)
+        '''b = ctypes.c_uint(block_id)
         bb = ctypes.byref(self._buff)
         p = ctypes.c_uint32(self.packet_size)
         w = ctypes.byref(writelen)
         if 1000 != Wirehair_Success:
-            return None
+            return None'''
         return bytes(bytearray(self._buff)[:writelen.value])

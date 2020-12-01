@@ -57,8 +57,8 @@ set(GEN_TABLES
 if(MSVC)
 else()
     set(CMAKE_CXX_FLAGS "-Wall -Wextra -static-libgcc -static-libstdc++")
-    set(CMAKE_CXX_FLAGS_DEBUG "-g -O0 -march=native")
-    set(CMAKE_CXX_FLAGS_RELEASE "-g -O2 -march=native")
+    set(CMAKE_CXX_FLAGS_DEBUG "-g -O0")
+    set(CMAKE_CXX_FLAGS_RELEASE "-g -O2")
 endif()
 
 add_library(wirehair ${LIB_SOURCE_FILES})

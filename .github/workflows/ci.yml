@@ -18,11 +18,11 @@ jobs:
       - name: build native code
         run: make build
       - name: which python?
-        run: which coverage
+        run: sudo which python3
       - name: Run tests!
         run: |
           ulimit -c unlimited
-          sudo $(which coverage3) run -m unittest discover -s tests/
+          sudo python3 run -m unittest discover -s tests/
       - name: Log coverage
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

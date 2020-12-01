@@ -14,13 +14,11 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: install dependencies
-        run: sudo pip install -U pip coveralls coverage
+        run: sudo pip3 install -U pip coveralls coverage
       - name: build native code
         run: make build
       - name: Run tests!
-        run: |
-          sudo ulimit -c unlimited
-          sudo coverage3 run -m unittest discover -s tests/
+        run: sudo coverage3 run -m unittest discover -s tests/
       - name: Log coverage
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

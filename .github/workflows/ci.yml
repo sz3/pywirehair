@@ -22,8 +22,7 @@ jobs:
       - name: Run tests!
         run: |
           ulimit -c unlimited
-          sudo echo '/tmp/core.%h.%e.%t' > /proc/sys/kernel/core_pattern
-          sudo $(which coverage) run -m unittest discover -s tests/
+          sudo python3 run -m unittest discover -s tests/
       - name: Log coverage
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

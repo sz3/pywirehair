@@ -18,6 +18,8 @@ jobs:
       - name: build native code
         run: make build
       - name: which python?
+        run: which python3
+      - name: which python root?
         run: sudo which python3
       - name: Run tests!
         run: |

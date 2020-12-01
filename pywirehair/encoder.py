@@ -14,7 +14,7 @@ class encoder:
         self._buff = (ctypes.c_uint8 * packet_size)()
 
     def encode(self, block_id):
-        writelen = ctypes.c_uint32(0)
+        #writelen = ctypes.c_uint32(0)
         print(wirehair().dll())
         '''b = ctypes.c_uint(block_id)
         bb = ctypes.byref(self._buff)
@@ -22,4 +22,4 @@ class encoder:
         w = ctypes.byref(writelen)
         if 1000 != Wirehair_Success:
             return None'''
-        return bytes(bytearray(self._buff)[:writelen.value])
+        return bytes(bytearray(self._buff)[:0])

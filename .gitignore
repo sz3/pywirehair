@@ -4,3 +4,4 @@ pywirehair.egg-info/
 __pycache__/
 libwirehair.so*
 .coverage
+*.pyc

@@ -64,7 +64,7 @@ set(GEN_TABLES
 
 if(MSVC)
 else()
-    set(CMAKE_CXX_FLAGS "-Wall -Wextra")
+    set(CMAKE_CXX_FLAGS "-Wall -Wextra -static-libgcc -static-libstdc++")
     set(CMAKE_CXX_FLAGS_DEBUG "-g -O0")
     set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 endif()

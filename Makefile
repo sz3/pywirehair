@@ -15,6 +15,9 @@ build:
 	python setup.py build
 	python dev-copy-libs.py
 
+wheel: build
+	python setup.py bdist_wheel
+
 test:
 	coverage run -m unittest
 	coverage report

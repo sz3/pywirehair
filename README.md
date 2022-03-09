@@ -5,7 +5,7 @@ A python wrapper for the [wirehair](https://github.com/catid/wirehair) forward e
 I'll probably put some wheels in pypi sooner or later. In the meantime:
 
 ```
-make build
+python setup.py build
 python setup.py install
 ```
 

@@ -1,6 +1,6 @@
 ## pywirehair
 
-A python wrapper for the [wirehair](https://github.com/catid/wirehair) forward error correction C library. wirehair is included as a git subtree.
+A python wrapper for the [wirehair](https://github.com/catid/wirehair) forward error correction C/C++ library. wirehair is included as a git subtree.
 
 I'll probably put some wheels in pypi sooner or later. In the meantime:
 

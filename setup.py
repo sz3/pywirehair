@@ -7,7 +7,11 @@ from os.path import join as path_join, abspath, dirname
 
 from setuptools import setup, Extension, find_packages
 from setuptools.command.build_ext import build_ext
-from distutils.version import LooseVersion
+
+try:
+    from packaging.version import Version
+except:
+    from distutils.version import LooseVersion as Version
 
 
 class CMakeExtension(Extension):
@@ -24,8 +28,8 @@ class CMakeBuild(build_ext):
             raise RuntimeError("CMake must be installed to build the following extensions: " +
                                ", ".join(e.name for e in self.extensions))
 
-        cmake_version = LooseVersion(re.search(r'version\s*([\d.]+)', out.decode()).group(1))
-        if cmake_version < LooseVersion('3.5.0'):
+        cmake_version = Version(re.search(r'version\s*([\d.]+)', out.decode()).group(1))
+        if cmake_version < Version('3.5.0'):
             raise RuntimeError("CMake >= 3.5.0 is required")
 
         for ext in self.extensions:
@@ -33,7 +37,7 @@ class CMakeBuild(build_ext):
 
     def build_extension(self, ext):
         extdir = path_join(abspath(dirname(self.get_ext_fullpath(ext.name))), 'pywirehair')
-        print(f'extdir is {extdir}')
+        print('extdir is {}'.format(extdir))
         cmake_args = ['-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=' + extdir]
         cmake_args += ['-DBUILD_SHARED_LIBS=1']
 

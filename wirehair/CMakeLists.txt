@@ -3,6 +3,14 @@ project(wirehair)
 
 set(CMAKE_CXX_STANDARD 11)
 
+set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "" FORCE)
+
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Release)
+endif()
+
+option(MARCH_NATIVE "Use -march=native option" ON)
+
 set(LIB_SOURCE_FILES
         wirehair.cpp
         include/wirehair/wirehair.h
@@ -57,8 +65,13 @@ set(GEN_TABLES
 if(MSVC)
 else()
     set(CMAKE_CXX_FLAGS "-Wall -Wextra -static-libgcc -static-libstdc++")
-    set(CMAKE_CXX_FLAGS_DEBUG "-g -O0 -march=native")
-    set(CMAKE_CXX_FLAGS_RELEASE "-O3 -march=native")
+    set(CMAKE_CXX_FLAGS_DEBUG "-g -O0")
+    set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+endif()
+
+if(MARCH_NATIVE)
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -march=native")
+    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -march=native")
 endif()
 
 add_library(wirehair ${LIB_SOURCE_FILES})
@@ -87,4 +100,7 @@ include(GNUInstallDirs)
 
 install(TARGETS wirehair
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(DIRECTORY include DESTINATION ${CMAKE_INSTALL_PREFIX})
+install(DIRECTORY python DESTINATION ${CMAKE_INSTALL_PREFIX})

@@ -71,8 +71,7 @@ class CMakeBuild(build_ext):
 
 
 def read_version():
-    with open("VERSION") as f:
-        return f.readline().strip()
+    return '0.1.0'  # pull version from source, eventually
 
 
 setup(

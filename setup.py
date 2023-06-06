@@ -81,7 +81,7 @@ setup(
     version=read_version(),
 
     author='Stephen Zimmerman',
-    author_email='sz@galacticicecube.com',
+    author_email='sz@recv.cc',
     description='Python wrapper for wirehair FEC',
     long_description=open("README.md").read(),
     long_description_content_type='text/markdown',
